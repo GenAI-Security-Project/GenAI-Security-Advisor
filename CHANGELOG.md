@@ -2,7 +2,14 @@
 
 All notable changes to this skill are documented here. Versioning follows [Semantic Versioning](https://semver.org/): **patch** for doc/text fixes, **minor** for a new or updated corpus resource, **major** for a taxonomy-breaking change (e.g. a superseded Top 10). The version in `SKILL.md` frontmatter, `.claude-plugin/marketplace.json`, and `gemini-extension.json` are kept in sync at every bump -- see "Versioning" in `CONTRIBUTING.md`.
 
-Initiative lead: **Scott Clinton**, OWASP GenAI Security Project.
+- **Author:** Scott Clinton
+- **Organization:** OWASP GenAI Security Project
+
+## [1.0.1] - 2026-08-10
+
+### Changed
+
+- Split the combined "Scott Clinton (OWASP GenAI Security Project)" author string into separate, distinct metadata fields everywhere it appeared: `SKILL.md` frontmatter now has `author: Scott Clinton` plus `metadata.organization: OWASP GenAI Security Project`; `marketplace.json`'s plugin entry `author` is now person-only (the org was already separately represented in its top-level `owner` field); `gemini-extension.json` gained standalone `author`/`organization` fields (not part of Gemini's documented extension schema, so likely inert metadata rather than something the installer reads -- included for consistency/transparency, not functional effect).
 
 ## [1.0.0] - 2026-08-10
 
