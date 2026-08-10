@@ -92,37 +92,44 @@ resources:
       https://genai-security-project.github.io/GenAI-Data-Security-Initiative/
       Use this for "which control does risk X map to" questions. For DSGAI
       narrative prose (attack scenario writeups), see dsgai-risk-doc-2026
-      below -- that content is linked, not vendored.
+      below.
 
   - id: dsgai-risk-doc-2026
     title: "GenAI Data Security Risks and Mitigations 2026 (v1.0)"
     initiative: data-security
     version: "1.0"
-    status: linked
+    status: current
     format: pdf
-    path: null
+    path: corpus/data-security/dsgai-2026/OWASP-GenAI-Data-Security-Risks-and-Mitigations-2026-v1.0.pdf
     license: CC-BY-SA-4.0
     source_url: https://genai.owasp.org/resource/owasp-genai-data-security-risks-mitigations-2026/
+    vendored_date: "2026-08-09"
     published: "2026-03-01"
     notes: >
       Full narrative writeup of the 21 DSGAI risks with tiered mitigations
-      (Foundational / Hardening / Advanced). Not vendored -- PDF-only, no
-      markdown source located. Fetch/summarize live via WebFetch when a
-      query needs prose beyond what dsgai-crosswalk-entries-2026 provides.
+      (Foundational / Hardening / Advanced), 103 pages. No markdown source
+      exists upstream -- vendored as the original PDF. Read via the Read
+      tool with a page range rather than loading the whole document at
+      once. Complements dsgai-crosswalk-entries-2026 (structured framework
+      mappings) with the narrative prose and attack scenarios.
 
   - id: data-security-best-practices-2025
     title: "LLM and GenAI Data Security Best Practices 2025 (v1.0)"
     initiative: data-security
     version: "1.0"
-    status: linked
+    status: current
     format: pdf
-    path: null
+    path: corpus/data-security/best-practices-2025/LLM-and-GenAI-Data-Security-Best-Practices-2025-v1.0.pdf
     license: CC-BY-SA-4.0
     source_url: https://genai.owasp.org/resource/llm-and-gen-ai-data-security-best-practices/
+    vendored_date: "2026-08-09"
     published: "2025-02-01"
     notes: >
       Implementation guide (secure deployment architectures, monitoring,
-      governance models). Not vendored -- PDF-only.
+      governance models, access control for LLM pipelines). No markdown
+      source upstream -- vendored as the original PDF. Read via the Read
+      tool with a page range rather than loading the whole document at
+      once.
 
   - id: governance-checklist-1.1
     title: "LLM AI Cybersecurity & Governance Checklist"
