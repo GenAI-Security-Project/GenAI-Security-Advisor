@@ -47,11 +47,36 @@ resources:
       two appendices (framework mappings, threat-modeling architecture) and
       an AISVS mapping.
 
+  - id: agentic-top10-2026
+    title: "OWASP Top 10 for Agentic Applications 2026"
+    initiative: agentic-top10
+    version: "2026"
+    status: current
+    format: pdf
+    path: corpus/agentic-top10/2026-final/OWASP-Top-10-for-Agentic-Applications-2026-v1.0.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: "2025-12-01"
+    notes: >
+      The real, finished Agentic Top 10 (57pp): ASI01 Agent Goal Hijack,
+      ASI02 Tool Misuse and Exploitation, ASI03 Identity and Privilege
+      Abuse, ASI04 Agentic Supply Chain Vulnerabilities, ASI05 Unexpected
+      Code Execution (RCE), ASI06 Memory & Context Poisoning, ASI07
+      Insecure Inter-Agent Communication, ASI08 Cascading Failures, ASI09
+      Human-Agent Trust Exploitation, ASI10 Rogue Agents. This is the
+      numbering LLM Top 10 files cross-reference -- supersedes
+      agentic-top10-candidates-0.5. No markdown source located upstream;
+      vendored as the original PDF (includes an OWASP Agentic AI Security
+      Mapping Matrix, a CycloneDX/AIBOM relationship appendix, a mapping
+      to the Non-Human Identities Top 10, and an exploits/incidents
+      tracker as appendices -- read relevant sections via page range).
+
   - id: agentic-top10-candidates-0.5
     title: "OWASP Agentic Security Initiative -- Top 10 Candidates (v0.5)"
     initiative: agentic-top10
     version: "0.5-initial-candidates"
-    status: draft
+    status: superseded
     format: markdown
     path: corpus/agentic-top10/0.5-candidates/
     license: CC-BY-SA-4.0
@@ -61,15 +86,83 @@ resources:
     vendored_date: "2026-08-09"
     published: null
     notes: >
-      Early candidate draft with 16 real, written-out entries under working
-      names (e.g. "Memory Poisoning", "Tool Misuse"). This is NOT the same
-      taxonomy or numbering as the ASI01-10 list referenced on
-      genai.owasp.org -- the newer "Sprint 1" folder in the source repo
-      contains only unfilled templates as of 2026-08-09, so this older
-      draft is the best available real content. Category names, numbering,
-      and count will likely change before a final Agentic Top 10 ships.
-      Always caveat answers drawn from this as "early draft, subject to
-      change" -- never present it as a finalized OWASP Top 10.
+      Superseded by agentic-top10-2026. Kept for historical reference --
+      this earlier working draft used different category names/numbering
+      than the final published list, and is useful context for "how did
+      this category evolve" questions but should not be used by default.
+
+  - id: agentic-threats-mitigations-1.1
+    title: "Agentic AI - Threats and Mitigations"
+    initiative: agentic-top10
+    version: "1.1"
+    status: current
+    format: pdf
+    path: corpus/agentic-top10/companions/Agentic-AI-Threats-and-Mitigations-1.1.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
+    vendored_date: "2026-08-09"
+    published: "2025-12-01"
+    notes: >
+      Narrative threats/mitigations companion to the Agentic Top 10 (53pp)
+      -- broader threat catalog than the 10 headline categories.
+
+  - id: securing-agentic-applications-guide-1.0
+    title: "Securing Agentic Applications Guide"
+    initiative: agentic-top10
+    version: "1.0"
+    status: current
+    format: pdf
+    path: corpus/agentic-top10/companions/Securing-Agentic-Applications-Guide-1.0.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: null
+    notes: "Practical implementation guide for securing agentic applications (81pp)."
+
+  - id: agentic-mas-threat-modelling-guide-1.0
+    title: "Agentic AI - MAS Threat Modelling Guide"
+    initiative: agentic-top10
+    version: "1.0"
+    status: current
+    format: pdf
+    path: corpus/agentic-top10/companions/Agentic-AI-MAS-Threat-Modelling-Guide-v1.0.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: null
+    notes: >
+      Multi-agent-system-specific threat modeling guide (63pp) -- use for
+      the "draft a threat model" task when the target is multi-agent, not
+      a single LLM app (use Appendix B of the LLM Top 10 for that case).
+
+  - id: agentic-top10-aiuc1-crosswalk
+    title: "OWASP Top 10 for Agentic Applications -- AIUC-1 Crosswalk"
+    initiative: agentic-top10
+    version: "2026-05"
+    status: current
+    format: pdf
+    path: corpus/agentic-top10/companions/OWASP-Top10-for-Agentic-Applications-AIUC-1-Crosswalk.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: "2026-05-01"
+    notes: "Maps the Agentic Top 10 to the AIUC-1 framework (55pp)."
+
+  - id: agentic-ans-agent-discovery-1.0
+    title: "Agentic AI - Agent Name Service (ANS) for Secure AI Agent Discovery"
+    initiative: agentic-top10
+    version: "1.0"
+    status: current
+    format: pdf
+    path: corpus/agentic-top10/companions/Agentic-AI-Agent-Name-Service-ANS-v1.0.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: null
+    notes: >
+      Spec/guide for secure agent identity and discovery (53pp) -- relevant
+      to ASI03 Identity and Privilege Abuse and ASI07 Insecure Inter-Agent
+      Communication.
 
   - id: dsgai-crosswalk-entries-2026
     title: "GenAI Security Crosswalk -- structured risk + framework mapping entries"
@@ -147,3 +240,108 @@ resources:
       header found. Do NOT vendor a copy into this repo until the license
       is confirmed with the initiative lead -- link to the official PDF
       instead.
+
+  - id: mcp-server-development-guide-1.0
+    title: "A Practical Guide for Secure MCP Server Development"
+    initiative: mcp-security
+    version: "1.0"
+    status: current
+    format: pdf
+    path: corpus/mcp-security/A-Practical-Guide-for-Secure-MCP-Server-Development-v1.0.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: null
+    notes: "Guidance for building MCP servers securely (17pp). New corpus category as of 2026-08-09."
+
+  - id: mcp-third-party-cheatsheet-1.0
+    title: "Cheat Sheet: A Practical Guide for Securely Using Third-Party MCP Servers"
+    initiative: mcp-security
+    version: "1.0"
+    status: current
+    format: pdf
+    path: corpus/mcp-security/Cheat-Sheet-Securely-Using-Third-Party-MCP-Servers-v1.0.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: null
+    notes: "Short cheat sheet (16pp) for consuming third-party MCP servers safely."
+
+  - id: red-teaming-vendor-evaluation-criteria-1.0
+    title: "Vendor Evaluation Criteria for AI Red Teaming Providers & Tooling"
+    initiative: red-teaming
+    version: "1.0"
+    status: current
+    format: pdf
+    path: corpus/red-teaming/Vendor-Evaluation-Criteria-for-AI-Red-Teaming-Providers-Tooling-v1.0.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: "2026-01-13"
+    notes: >
+      Criteria for evaluating AI red-teaming vendors/tooling (32pp). New
+      corpus category as of 2026-08-09.
+
+  - id: llm-exploit-generation-1.0
+    title: "OWASP LLM Exploit Generation v1.0"
+    initiative: red-teaming
+    version: "1.0"
+    status: linked
+    format: pdf
+    path: null
+    license: UNCONFIRMED
+    source_url: https://genai.owasp.org/resource/owasp-llm-exploit-generation-v1-0-pdf/
+    published: null
+    notes: >
+      No explicit CC BY-SA (or other) license statement found anywhere in
+      the document text -- only a generic mention that project output is
+      "released under open source and creative commons licenses." Do NOT
+      vendor until confirmed with the CTI Layer Team / initiative lead.
+
+  - id: genai-incident-response-guide-1.0
+    title: "GenAI Incident Response Guide 1.0"
+    initiative: incident-response
+    version: "1.0"
+    status: linked
+    format: pdf
+    path: null
+    license: UNCONFIRMED
+    source_url: https://genai.owasp.org/resource/genai-incident-response-guide-1-0/
+    published: null
+    notes: >
+      No license statement found anywhere in the document text (82pp,
+      checked in full). Do NOT vendor until confirmed with the initiative
+      lead. New corpus category (incident-response) as of 2026-08-09 --
+      currently has no vendored content, only this linked entry.
+
+  - id: compass-runbook-1.0
+    title: "OWASP GenAI COMPASS RunBook (+ companion spreadsheet)"
+    initiative: governance
+    version: "1.0"
+    status: current
+    format: mixed
+    path: corpus/governance/compass/
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: null
+    notes: >
+      RunBook PDF (37pp, confirmed CC BY-SA 4.0) plus its companion
+      OWASP-GenAI-COMPASS-v1.xlsx spreadsheet. The spreadsheet's own
+      license isn't independently verifiable (not a text-searchable PDF)
+      -- treated as covered by the same grant as its parent RunBook since
+      it's explicitly packaged as a companion asset, not independently
+      confirmed.
+
+  - id: state-of-agentic-ai-security-governance-2.01
+    title: "State of Agentic AI Security and Governance v2.01"
+    initiative: governance
+    version: "2.01"
+    status: current
+    format: pdf
+    path: corpus/governance/State-of-Agentic-AI-Security-and-Governance-v2.01.pdf
+    license: CC-BY-SA-4.0
+    source_url: https://genai.owasp.org/
+    vendored_date: "2026-08-09"
+    published: null
+    notes: "Industry state-of-the-field report (139pp)."
