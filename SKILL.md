@@ -1,5 +1,8 @@
 ---
 name: genai-security-advisor
+version: 1.0.0
+author: Scott Clinton (OWASP GenAI Security Project)
+license: Apache-2.0
 description: Grounds answers about GenAI/LLM/agentic AI security in the OWASP GenAI Security Project's published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP server security, AI red-teaming, incident response, and governance/maturity guidance. Use when reviewing code, architecture, or incidents for GenAI security risk; mapping a finding to an OWASP category or compliance framework (NIST AI RMF, ISO 42001, EU AI Act, MITRE ATLAS, etc.); drafting a threat model / checklist for an LLM or agentic application; evaluating MCP server or AI red-teaming vendor risk; or responding to a GenAI security incident.
 ---
 
