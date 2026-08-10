@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Agent Skill grounding GenAI/LLM/agentic AI security guidance in the OWASP GenAI Security Project's published research.",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "plugins": [
     {
       "name": "genai-security-advisor",
       "description": "Grounds answers about GenAI/LLM/agentic AI security in the OWASP GenAI Security Project's published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance.",
-      "version": "1.0.0",
-      "author": "Scott Clinton (OWASP GenAI Security Project)",
+      "version": "1.0.1",
+      "author": "Scott Clinton",
       "license": "Apache-2.0",
       "source": "./",
       "strict": false,

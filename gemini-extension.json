@@ -1,5 +1,7 @@
 {
   "name": "genai-security-advisor",
-  "version": "1.0.0",
-  "description": "Grounds answers about GenAI/LLM/agentic AI security in the OWASP GenAI Security Project's published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance."
+  "version": "1.0.1",
+  "description": "Grounds answers about GenAI/LLM/agentic AI security in the OWASP GenAI Security Project's published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance.",
+  "author": "Scott Clinton",
+  "organization": "OWASP GenAI Security Project"
 }

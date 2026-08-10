@@ -2,7 +2,8 @@
 
 An [Agent Skill](https://agentskills.io) that grounds security guidance in the [OWASP GenAI Security Project](https://genai.owasp.org)'s published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance -- instead of relying on a model's general (and possibly stale) knowledge of the taxonomy.
 
-**Initiative lead:** Scott Clinton, OWASP GenAI Security Project.
+- **Author:** Scott Clinton
+- **Organization:** OWASP GenAI Security Project
 
 See [`SKILL.md`](./SKILL.md) for the skill instructions themselves, and [`CHANGELOG.md`](./CHANGELOG.md) for version history.
 
