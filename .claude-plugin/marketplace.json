@@ -1,0 +1,22 @@
+{
+  "name": "genai-security-advisor",
+  "owner": {
+    "name": "OWASP GenAI Security Project",
+    "url": "https://genai.owasp.org"
+  },
+  "metadata": {
+    "description": "Agent Skill grounding GenAI/LLM/agentic AI security guidance in the OWASP GenAI Security Project's published research.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "genai-security-advisor",
+      "description": "Grounds answers about GenAI/LLM/agentic AI security in the OWASP GenAI Security Project's published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    }
+  ]
+}

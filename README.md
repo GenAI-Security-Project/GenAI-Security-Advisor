@@ -17,6 +17,19 @@ See [`SKILL.md`](./SKILL.md) for the skill instructions themselves.
 
 Clone this repo and run any of the above from within it -- the skill and `corpus/` are discovered automatically. To edit the skill's instructions, edit root `SKILL.md`; the symlinks need no changes.
 
+### Installing it into other projects
+
+The table above is zero-config discovery *within this repo*. To use the skill while working somewhere else, each platform has its own install/registration mechanism -- verify exact flags against each tool's current `--help`, these are fast-moving CLI surfaces:
+
+| Tool | Registration |
+|---|---|
+| Claude Code | `.claude-plugin/marketplace.json` at repo root -- `/plugin marketplace add GenAI-Security-Project/GenAI-Security-Advisor`, then `/plugin install`. Or just copy the skill folder into `~/.claude/skills/genai-security-advisor/`. |
+| OpenAI Codex CLI | `npx skills add GenAI-Security-Project/GenAI-Security-Advisor -g` (global). The same installer can target multiple hosts at once, e.g. adding `-a codex -a claude-code -a copilot -a gemini-cli`. |
+| Gemini CLI | `gemini-extension.json` at repo root + a top-level `skills/genai-security-advisor/SKILL.md` (the extension packaging convention, separate from the `.gemini/skills/` project-discovery path) -- `gemini extensions install https://github.com/GenAI-Security-Project/GenAI-Security-Advisor`. |
+| GitHub Copilot | `gh skill install GenAI-Security-Project/GenAI-Security-Advisor` installs to `~/.copilot/skills/`. |
+
+All of these fetch from GitHub, so they only work for whoever has read access to this repo.
+
 ## Independence from upstream repos
 
 `corpus/` holds **frozen, point-in-time copies** of content from the OWASP GenAI Security Project's various initiative repos -- plain files, copied and committed, never git submodules or any other live reference. If an upstream repo changes, nothing here changes automatically. This is deliberate: the Advisor's answers shouldn't shift underneath users because someone edited a document in an unrelated repo. Pulling in an upstream update is always a manual, reviewed act -- see "Adding or updating a resource" below. Each vendored `MANIFEST.yaml` entry records the exact upstream commit (`vendored_commit`) it was copied from, purely for provenance -- not consulted at query time, not a sync pointer.
@@ -43,4 +56,4 @@ No code changes are needed to pick up new content -- the skill instructions read
 
 ## Status
 
-Private, pre-release. First milestone is shipping the Skill; a web-based surface is planned as a follow-on (see the Data Security Initiative's [live crosswalk app](https://genai-security-project.github.io/GenAI-Data-Security-Initiative/) for a working precedent of a fully GitHub-hosted app in this project).
+Public, pre-release. First milestone is shipping the Skill; a web-based surface is planned as a follow-on (see the Data Security Initiative's [live crosswalk app](https://genai-security-project.github.io/GenAI-Data-Security-Initiative/) for a working precedent of a fully GitHub-hosted app in this project).
