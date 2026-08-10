@@ -4,6 +4,10 @@ A Claude Skill that grounds security guidance in the [OWASP GenAI Security Proje
 
 See [`SKILL.md`](./SKILL.md) for the skill instructions themselves.
 
+## Independence from upstream repos
+
+`corpus/` holds **frozen, point-in-time copies** of content from the OWASP GenAI Security Project's various initiative repos -- plain files, copied and committed, never git submodules or any other live reference. If an upstream repo changes, nothing here changes automatically. This is deliberate: the Advisor's answers shouldn't shift underneath users because someone edited a document in an unrelated repo. Pulling in an upstream update is always a manual, reviewed act -- see "Adding or updating a resource" below. Each vendored `MANIFEST.yaml` entry records the exact upstream commit (`vendored_commit`) it was copied from, purely for provenance -- not consulted at query time, not a sync pointer.
+
 ## Repository layout
 
 - **`SKILL.md`** -- the skill's instructions (Apache-2.0, this repo's own work).
@@ -12,8 +16,8 @@ See [`SKILL.md`](./SKILL.md) for the skill instructions themselves.
 
 ## Adding or updating a resource
 
-1. Drop the new file(s) into the right `corpus/<initiative>/` subfolder. If this is a new version of something that already exists, put it in a new version-dated folder rather than overwriting the old one.
-2. Add an entry to `corpus/MANIFEST.yaml` (see the comments at the top of that file for the schema).
+1. Drop the new file(s) into the right `corpus/<initiative>/` subfolder. If this is a new version of something that already exists, put it in a new version-dated folder rather than overwriting the old one. Copy the files directly -- don't add a submodule or any other live link back to the source repo.
+2. Add an entry to `corpus/MANIFEST.yaml` (see the comments at the top of that file for the schema). If you copied from a GitHub repo, record the commit SHA you copied from as `vendored_commit` and today's date as `vendored_date`.
 3. If this supersedes an earlier entry, change that entry's `status` to `superseded` -- don't delete it.
 4. Open a PR. CI validates the manifest automatically.
 

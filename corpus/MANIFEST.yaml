@@ -16,6 +16,17 @@
 #   superseded -- kept for historical reference, not used by default
 #   linked     -- cataloged but not vendored (e.g. PDF-only, license unclear);
 #                 skill should link out rather than quote from it
+#
+# INDEPENDENCE: everything under corpus/ is a frozen, point-in-time copy,
+# not a submodule or live reference. Changes to the upstream source repos
+# (source_repo/source_path below) do NOT propagate here automatically --
+# there is no sync mechanism. This is deliberate: the Advisor's behavior
+# should not change underneath users because someone edited an upstream
+# repo. `vendored_commit` records the exact upstream commit each entry was
+# copied from, purely for provenance/auditability -- it is not consulted
+# at query time and does not trigger any update. Pulling in upstream
+# changes is always a manual act: re-fetch, review, PR, per the process in
+# README.md.
 
 resources:
   - id: llm-top10-2026
@@ -28,6 +39,8 @@ resources:
     license: CC-BY-SA-4.0
     source_repo: https://github.com/genai-security-project/GenAI-LLM-Top10
     source_path: 2026/final/
+    vendored_commit: 7e144e05142b2105faa1603178a1163a2a34df24
+    vendored_date: "2026-08-09"
     published: "2026-08-04"
     notes: >
       Canonical published release. One file per category (LLM01-LLM10) plus
@@ -44,6 +57,8 @@ resources:
     license: CC-BY-SA-4.0
     source_repo: https://github.com/genai-security-project/GenAI-Agent-Security-Initiative
     source_path: agentic-top-10/0.5-initial-candidates/
+    vendored_commit: 964f83449cf14d03f4a2677af8532bda5e46ea8b
+    vendored_date: "2026-08-09"
     published: null
     notes: >
       Early candidate draft with 16 real, written-out entries under working
@@ -66,6 +81,8 @@ resources:
     license: CC-BY-SA-4.0
     source_repo: https://github.com/genai-security-project/GenAI-Data-Security-Initiative
     source_path: crosswalk/data/entries/
+    vendored_commit: c64ac507445c7fb57209bac5fd2b0c639a0d194d
+    vendored_date: "2026-08-09"
     published: "2026-03-01"
     notes: >
       41 structured entries (LLM01-10, ASI01-10, DSGAI01-21), each mapped to
