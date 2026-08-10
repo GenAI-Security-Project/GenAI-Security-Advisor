@@ -1,8 +1,21 @@
 # GenAI-Security-Advisor
 
-A Claude Skill that grounds security guidance in the [OWASP GenAI Security Project](https://genai.owasp.org)'s published research -- the LLM Top 10, Agentic Security taxonomy, and Data Security risk/framework mappings -- instead of relying on the model's general (and possibly stale) knowledge of the taxonomy.
+An [Agent Skill](https://agentskills.io) that grounds security guidance in the [OWASP GenAI Security Project](https://genai.owasp.org)'s published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance -- instead of relying on a model's general (and possibly stale) knowledge of the taxonomy.
 
 See [`SKILL.md`](./SKILL.md) for the skill instructions themselves.
+
+## Works across platforms
+
+`SKILL.md` uses the open [Agent Skills](https://agentskills.io) format (YAML frontmatter + Markdown instructions), which as of 2026 is supported by 30+ tools across vendors. There's one canonical file -- `SKILL.md` at the repo root -- discoverable via symlinks at each platform's expected path, so there's nothing to keep in sync:
+
+| Tool | Discovery path (symlink to root `SKILL.md`) |
+|---|---|
+| Claude Code | `.claude/skills/genai-security-advisor/SKILL.md` |
+| OpenAI Codex CLI | `.agents/skills/genai-security-advisor/SKILL.md` |
+| GitHub Copilot | `.github/skills/genai-security-advisor/SKILL.md` (also reads `.claude/skills/` and `.agents/skills/` directly) |
+| Gemini CLI | `.gemini/skills/genai-security-advisor/SKILL.md` |
+
+Clone this repo and run any of the above from within it -- the skill and `corpus/` are discovered automatically. To edit the skill's instructions, edit root `SKILL.md`; the symlinks need no changes.
 
 ## Independence from upstream repos
 
@@ -10,7 +23,7 @@ See [`SKILL.md`](./SKILL.md) for the skill instructions themselves.
 
 ## Repository layout
 
-- **`SKILL.md`** -- the skill's instructions (Apache-2.0, this repo's own work).
+- **`SKILL.md`** -- the skill's instructions (Apache-2.0, this repo's own work). Canonical copy; `.claude/`, `.agents/`, `.github/`, `.gemini/` each hold a `skills/genai-security-advisor/SKILL.md` symlink back to it -- see "Works across platforms" above.
 - **`corpus/`** -- vendored and linked source content from the project's research. See [`corpus/MANIFEST.yaml`](./corpus/MANIFEST.yaml) for the catalog of everything in here, its status (current/draft/superseded/linked), and its license. **Content in `corpus/` is third-party and mostly CC BY-SA 4.0** -- it is not covered by this repo's Apache-2.0 license. See [Licensing](#licensing) below.
 - **`scripts/validate_corpus.py`** -- checks that every `MANIFEST.yaml` entry has its required fields and that its `path` (if any) actually exists. Runs in CI on every PR that touches `corpus/`.
 
