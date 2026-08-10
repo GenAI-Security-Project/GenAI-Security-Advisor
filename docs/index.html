@@ -82,13 +82,10 @@
     pointer-events:none;
   }
   .hero .wrap{position:relative}
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
-    color:var(--hero-text-dim);
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.18);
-    padding:6px 12px; border-radius:999px;
+  .brand-logo{
+    display:block;
+    width:180px; height:auto;
+    margin-bottom:28px;
   }
   h1{
     font-size:clamp(2.1rem, 4.2vw, 3.2rem);
@@ -248,7 +245,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow">OWASP GenAI Security Project</span>
+    <img class="brand-logo" src="assets/genai-security-project-logo.png" alt="OWASP GenAI Security Project" width="220" height="78">
     <h1>GenAI Security Advisor</h1>
     <p class="lede">An Agent Skill that grounds GenAI, LLM, and agentic AI security guidance in this project's own published research — instead of a model's general, possibly stale, knowledge of the taxonomy.</p>
     <div class="badges">
