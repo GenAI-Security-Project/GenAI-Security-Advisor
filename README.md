@@ -2,7 +2,9 @@
 
 An [Agent Skill](https://agentskills.io) that grounds security guidance in the [OWASP GenAI Security Project](https://genai.owasp.org)'s published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance -- instead of relying on a model's general (and possibly stale) knowledge of the taxonomy.
 
-See [`SKILL.md`](./SKILL.md) for the skill instructions themselves.
+**Initiative lead:** Scott Clinton, OWASP GenAI Security Project.
+
+See [`SKILL.md`](./SKILL.md) for the skill instructions themselves, and [`CHANGELOG.md`](./CHANGELOG.md) for version history.
 
 ## Works across platforms
 
@@ -51,9 +53,14 @@ No code changes are needed to pick up new content -- the skill instructions read
 
 ## Licensing
 
-- This repo's own content (`SKILL.md`, `scripts/`, workflow files, this README) is licensed under **Apache-2.0** -- see [`LICENSE`](./LICENSE).
-- Everything under `corpus/` is vendored or linked third-party content from the OWASP GenAI Security Project's various initiative repos, and retains its **original license** as recorded per-entry in `corpus/MANIFEST.yaml` (predominantly CC BY-SA 4.0). Check the manifest before redistributing corpus content outside this repo.
+- This repo's own content (`SKILL.md`, `scripts/`, workflow and manifest files, this README) is licensed under **Apache-2.0** -- see [`LICENSE`](./LICENSE).
+- Everything under `corpus/` is vendored or linked third-party content from the OWASP GenAI Security Project's various initiative repos, and retains its **original license** as recorded per-entry in `corpus/MANIFEST.yaml` -- predominantly **CC BY-SA 4.0**, confirmed against each source document's own license statement before vendoring. Check the manifest before redistributing corpus content outside this repo.
+- A handful of resources are cataloged as `status: linked` rather than vendored specifically because their license couldn't be confirmed -- see `CHANGELOG.md` and `corpus/MANIFEST.yaml` for which ones and why.
+
+## Versioning
+
+Follows [Semantic Versioning](https://semver.org/) -- see [`CHANGELOG.md`](./CHANGELOG.md) for what changed at each release, and "Versioning" in [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the process. The version is kept in sync across `SKILL.md` frontmatter, `.claude-plugin/marketplace.json`, and `gemini-extension.json`, since those are what each platform's own update-checking reads.
 
 ## Status
 
-Public, pre-release. First milestone is shipping the Skill; a web-based surface is planned as a follow-on (see the Data Security Initiative's [live crosswalk app](https://genai-security-project.github.io/GenAI-Data-Security-Initiative/) for a working precedent of a fully GitHub-hosted app in this project).
+Public, v1.0.0. First milestone is shipping the Skill; a web-based surface is planned as a follow-on (see the Data Security Initiative's [live crosswalk app](https://genai-security-project.github.io/GenAI-Data-Security-Initiative/) for a working precedent of a fully GitHub-hosted app in this project).
