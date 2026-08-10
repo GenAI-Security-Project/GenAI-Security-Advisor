@@ -12,6 +12,7 @@ You are grounding security guidance in the OWASP GenAI Security Project's publis
 1. Read `corpus/MANIFEST.yaml`. It is the only place that says what's current.
 2. Filter to `status: current` by default. Only pull from `status: draft` or `status: superseded` entries if the user is explicitly asking about that (e.g. "what did the 2025 list say," "what's the early agentic draft look like").
 3. For `status: linked` entries, there is no local copy -- use WebFetch on the `source_url` if the user needs that document's content, and say plainly that it's a PDF you fetched live, not vendored text.
+4. Some vendored resources are PDFs (`format: pdf` with a real `path`, e.g. the DSGAI risk doc and the Data Security Best Practices guide). Read these with the Read tool using a page range rather than loading the whole document -- both run 50-100+ pages. Skim the first couple of pages for a table of contents before guessing which range has what you need.
 
 ## What's in the corpus and when to use it
 
@@ -20,6 +21,8 @@ You are grounding security guidance in the OWASP GenAI Security Project's publis
 
   **Numbering warning**: the LLM Top 10 files (e.g. `LLM03_ExcessiveAgency.md`) cross-reference agentic risks by ID using the *newer* ASI numbering (e.g. "can manifest as ASI02: Tool Misuse & Exploitation, ASI03: Identity & Privilege Abuse, ASI08: Cascading Failures"). Files in `0.5-candidates/` use an *older* numbering where the same ASI-number can mean something different (old ASI01 = "Memory Poisoning", new ASI01 = "Agent Behaviour Hijack" -- not the same thing). When following a cross-reference from an LLM Top 10 file into the agentic draft, **match by topic/name, never by ASI-number** -- the numbers are not guaranteed to align between the two schemes, and a coincidental match at one number doesn't mean the scheme is otherwise aligned.
 - **`corpus/data-security/crosswalk-entries/`** -- structured JSON, one file per risk (LLM01-10, ASI01-10, DSGAI01-21), each with mappings to specific controls in 25 frameworks (MITRE ATLAS, NIST AI RMF, ISO 27001/42001, SOC 2, EU AI Act, FedRAMP, DORA, etc.). This is the tool for "which control covers this risk" or "what's our EU AI Act exposure for prompt injection" questions -- read the relevant `<ID>.json` file(s) directly.
+- **`corpus/data-security/dsgai-2026/...pdf`** -- the full narrative writeup of the 21 DSGAI risks (attack scenarios, tiered mitigations). Use when a data-security question needs prose/scenario detail beyond what the crosswalk JSON's `notes` fields give you.
+- **`corpus/data-security/best-practices-2025/...pdf`** -- implementation guide: secure deployment architectures, monitoring/auditing, access control for LLM pipelines, governance models. Use for "how do we actually implement X" data-security questions.
 
 ## Tasks this skill is for
 
@@ -32,7 +35,7 @@ Ground these in the corpus rather than general security knowledge:
 
 ## What this skill is not
 
-It doesn't cover the Governance Checklist or the full DSGAI narrative writeups in depth -- those are `status: linked` (PDF-only, not vendored). It doesn't include Red Team Lab exercises, the AIBOM/CycloneDX tooling, or Threat Intelligence Initiative content -- out of scope for this skill; point the user to `genai.owasp.org` for those.
+It doesn't cover the Governance Checklist -- that's `status: linked` (license unconfirmed, not vendored; use WebFetch on its `source_url` if needed and say so). It doesn't include Red Team Lab exercises, the AIBOM/CycloneDX tooling, or Threat Intelligence Initiative content -- out of scope for this skill; point the user to `genai.owasp.org` for those.
 
 ## Licensing
 
