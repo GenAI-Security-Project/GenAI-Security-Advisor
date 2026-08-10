@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GenAI Security Advisor — OWASP GenAI Security Project</title>
+<meta name="description" content="An Agent Skill that grounds GenAI/LLM/agentic AI security guidance in the OWASP GenAI Security Project's published research. Works with Claude Code, OpenAI Codex CLI, GitHub Copilot, and Gemini CLI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#0798FF;
+    --blue-2:#1683FD;
+    --navy:#001A3D;
+    --teal:#4D98A0;
+    --purple:#7a56ff;
+    --amber:#AE7811;
+
+    --bg:#ffffff;
+    --bg-soft:#F5F8FF;
+    --bg-tint:#E3EBFF;
+    --card:#ffffff;
+    --border:#E3E3E3;
+    --text:#222222;
+    --text-dim:#525a66;
+    --navy-text:#001A3D;
+    --hero-bg:linear-gradient(135deg,#001A3D 0%,#0b2a5c 55%,#0798FF 130%);
+    --hero-text:#ffffff;
+    --hero-text-dim:#c9dcf5;
+    --code-bg:#0f1b2d;
+    --code-text:#dce8f7;
+    --shadow: 0 1px 2px rgba(0,26,61,0.06), 0 8px 24px rgba(0,26,61,0.06);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1220;
+      --bg-soft:#0f1a2e;
+      --bg-tint:#12213a;
+      --card:#101c33;
+      --border:#20304d;
+      --text:#e8eefc;
+      --text-dim:#a9b8d1;
+      --navy-text:#dbe7fb;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+    .pill-current{ color:#8fd0d6; }
+    .pill-linked{ color:#e2b25a; }
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue-2)}
+  a:hover{text-decoration-thickness:2px}
+  code, .mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:.92em}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--hero-bg);
+    color:var(--hero-text);
+    padding:72px 0 88px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(600px 300px at 85% 10%, rgba(122,86,255,0.35), transparent 60%),
+      radial-gradient(500px 260px at 10% 90%, rgba(77,152,160,0.30), transparent 60%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--hero-text-dim);
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    padding:6px 12px; border-radius:999px;
+  }
+  h1{
+    font-size:clamp(2.1rem, 4.2vw, 3.2rem);
+    line-height:1.12;
+    margin:20px 0 16px;
+    font-weight:800;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    font-size:19px;
+    color:var(--hero-text-dim);
+    max-width:640px;
+    margin:0 0 28px;
+  }
+  .badges{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px}
+  .badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12.5px; font-weight:600;
+    padding:6px 11px; border-radius:7px;
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.22);
+    color:#fff;
+  }
+  .badge b{font-weight:700; color:#fff}
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 20px; border-radius:9px;
+    font-weight:700; font-size:15px;
+    text-decoration:none;
+    border:1px solid transparent;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:#fff; color:var(--navy)}
+  .btn-primary:hover{box-shadow:0 8px 20px rgba(0,0,0,0.25)}
+  .btn-ghost{background:transparent; color:#fff; border-color:rgba(255,255,255,0.35)}
+
+  /* ---------- Sections ---------- */
+  section{padding:64px 0}
+  section h2{
+    font-size:clamp(1.5rem, 2.6vw, 1.9rem);
+    font-weight:800;
+    color:var(--navy-text);
+    margin:0 0 10px;
+    letter-spacing:-0.01em;
+  }
+  .section-lede{color:var(--text-dim); max-width:680px; margin:0 0 36px; font-size:16px}
+  .alt{background:var(--bg-soft)}
+
+  /* capability cards */
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px 22px 20px;
+    box-shadow:var(--shadow);
+  }
+  .card .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:30px; height:30px; border-radius:8px;
+    background:var(--bg-tint); color:var(--blue-2);
+    font-weight:800; font-size:14px; margin-bottom:14px;
+  }
+  .card h3{font-size:16.5px; margin:0 0 8px; color:var(--navy-text); font-weight:700}
+  .card p{margin:0; color:var(--text-dim); font-size:14.5px}
+  .card .ex{
+    margin-top:12px; padding:10px 12px; border-radius:8px;
+    background:var(--bg-soft); border:1px solid var(--border);
+    font-size:13px; color:var(--text-dim);
+  }
+  :root[data-theme="dark"] .card .ex, :root:not([data-theme="light"]) .card .ex{
+    @media (prefers-color-scheme: dark){ background:var(--bg-tint); }
+  }
+
+  .out-of-scope{
+    margin-top:28px; padding:16px 18px; border-radius:10px;
+    border:1px solid var(--border); background:var(--card);
+    font-size:14px; color:var(--text-dim);
+  }
+  .out-of-scope b{color:var(--text)}
+
+  /* corpus table */
+  table{width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:var(--shadow)}
+  th,td{padding:13px 16px; text-align:left; font-size:14.5px; border-bottom:1px solid var(--border)}
+  th{background:var(--bg-tint); color:var(--navy-text); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em}
+  tr:last-child td{border-bottom:none}
+  .pill{
+    display:inline-block; padding:3px 9px; border-radius:999px;
+    font-size:12px; font-weight:700;
+  }
+  .pill-current{background:rgba(77,152,160,0.18); color:#2f6a70}
+  .pill-linked{background:rgba(174,120,17,0.16); color:var(--amber)}
+  .table-note{font-size:13.5px; color:var(--text-dim); margin-top:12px}
+  .table-scroll{overflow-x:auto}
+
+  /* install */
+  .platform-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:22px; box-shadow:var(--shadow); margin-bottom:18px;
+  }
+  .platform-card h3{
+    display:flex; align-items:center; gap:10px;
+    margin:0 0 6px; font-size:17px; color:var(--navy-text);
+  }
+  .platform-card .tag{
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
+    padding:3px 8px; border-radius:6px; background:var(--bg-tint); color:var(--blue-2);
+  }
+  .platform-card p{margin:6px 0 12px; color:var(--text-dim); font-size:14.5px}
+  pre{
+    margin:0; padding:14px 16px; border-radius:9px;
+    background:var(--code-bg); color:var(--code-text);
+    overflow-x:auto; font-size:13.5px; line-height:1.55;
+  }
+  .local-note{
+    margin-top:36px; padding:18px 20px; border-radius:12px;
+    background:linear-gradient(135deg, var(--bg-tint), var(--bg-soft));
+    border:1px solid var(--border); font-size:14.5px;
+  }
+  .local-note b{color:var(--navy-text)}
+
+  /* licensing */
+  .lic-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  @media (max-width:720px){ .lic-grid{grid-template-columns:1fr} .lic-note-row{flex-direction:column} }
+  .lic-card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:22px; box-shadow:var(--shadow);
+  }
+  .lic-card .chip{
+    display:inline-block; font-weight:800; font-size:13px;
+    padding:5px 11px; border-radius:7px; margin-bottom:12px;
+  }
+  .chip-apache{background:rgba(7,152,255,0.14); color:var(--blue-2)}
+  .chip-ccbysa{background:rgba(122,86,255,0.14); color:var(--purple)}
+  .lic-card ul{margin:10px 0 0; padding-left:20px; color:var(--text-dim); font-size:14px}
+  .lic-card li{margin-bottom:6px}
+  .lic-note-row{display:flex; gap:16px; margin-top:18px}
+  .lic-note{
+    flex:1; padding:14px 16px; border-radius:10px; font-size:13.5px;
+    background:var(--bg-soft); border:1px solid var(--border); color:var(--text-dim);
+  }
+
+  footer{
+    padding:44px 0 56px; border-top:1px solid var(--border);
+    font-size:13.5px; color:var(--text-dim);
+  }
+  footer .foot-row{display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; align-items:flex-start}
+  footer a{color:var(--text-dim)}
+  footer a:hover{color:var(--blue-2)}
+  footer .links{display:flex; flex-wrap:wrap; gap:16px}
+  footer .credit b{color:var(--text)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">OWASP GenAI Security Project</span>
+    <h1>GenAI Security Advisor</h1>
+    <p class="lede">An Agent Skill that grounds GenAI, LLM, and agentic AI security guidance in this project's own published research — instead of a model's general, possibly stale, knowledge of the taxonomy.</p>
+    <div class="badges">
+      <span class="badge">🏷️ <b>v1.0.1</b></span>
+      <span class="badge">⚖️ Apache-2.0 (skill) + CC BY-SA 4.0 (corpus)</span>
+      <span class="badge">🌐 Public</span>
+      <span class="badge">📚 19 cataloged resources</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor">View on GitHub →</a>
+      <a class="btn btn-ghost" href="#install">Install the skill</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>What it does</h2>
+    <p class="section-lede">Not a chatbot that re-explains the Top 10 — it's built for the workflow actions practitioners actually do, each one citing the specific category, control, or page it's grounded in.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="num">1</span>
+        <h3>Review code &amp; architecture</h3>
+        <p>Checks a design against the actual LLM Top 10 / Agentic Top 10 "Common Examples" and "Prevention" sections, citing the specific category per finding.</p>
+        <div class="ex">"Does this LangChain agent have an excessive-agency problem?" → cites <b>LLM06:2026</b> or <b>ASI02</b> directly.</div>
+      </div>
+      <div class="card">
+        <span class="num">2</span>
+        <h3>Map findings to compliance controls</h3>
+        <p>Looks up the exact control ID across 25 frameworks — NIST AI RMF, ISO 27001/42001, SOC 2, EU AI Act, FedRAMP, DORA, MITRE ATLAS.</p>
+        <div class="ex">"Which NIST control covers prompt injection?" → returns the specific <code>control_id</code> and tier.</div>
+      </div>
+      <div class="card">
+        <span class="num">3</span>
+        <h3>Draft a threat model or checklist</h3>
+        <p>Uses the OWASP threat-modeling appendix for single-LLM apps, or the MAS threat-modeling guide for multi-agent systems.</p>
+      </div>
+      <div class="card">
+        <span class="num">4</span>
+        <h3>Assess governance &amp; maturity</h3>
+        <p>Uses the COMPASS RunBook and its companion spreadsheet as the actual assessment framework.</p>
+      </div>
+      <div class="card">
+        <span class="num">5</span>
+        <h3>Evaluate MCP servers &amp; red-team vendors</h3>
+        <p>Grounds evaluations in the real MCP security guides and red-teaming vendor evaluation criteria.</p>
+      </div>
+      <div class="card">
+        <span class="num">6</span>
+        <h3>Classify a live incident</h3>
+        <p>Matches observed behavior to the correct Top 10 category — and says plainly when IR process guidance needs to be fetched live rather than improvised.</p>
+      </div>
+    </div>
+    <div class="out-of-scope">
+      <b>Deliberately out of scope:</b> hands-on Red Team Lab exercises, the AIBOM/CycloneDX generator tool, the live Threat Intelligence feed, and the Solutions Landscape/Directory (a separately maintained project). The skill points to <a href="https://genai.owasp.org">genai.owasp.org</a> for those rather than improvising.
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>What's in the corpus</h2>
+    <p class="section-lede">19 resources across 6 categories, cataloged in <code>corpus/MANIFEST.yaml</code> — the single source of truth the skill reads before answering. Content is vendored as frozen, point-in-time copies (never submodules), so upstream edits never silently change the Advisor's behavior.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Resources</th><th>Highlights</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Agentic security</td><td>7</td><td>OWASP Top 10 for Agentic Applications 2026 (ASI01–10), Threats &amp; Mitigations, MAS threat modeling, AIUC-1 crosswalk, Agent Name Service</td></tr>
+          <tr><td>Data security</td><td>3</td><td>41-risk × 25-framework crosswalk, DSGAI risk taxonomy, best-practices guide</td></tr>
+          <tr><td>Governance</td><td>3</td><td>COMPASS RunBook + spreadsheet, State of Agentic AI Security report, Governance Checklist <span class="pill pill-linked">linked</span></td></tr>
+          <tr><td>LLM security</td><td>1</td><td>OWASP Top 10 for LLM Applications 2026 (LLM01–10 + appendices)</td></tr>
+          <tr><td>MCP security</td><td>2</td><td>Secure MCP server development guide, third-party MCP usage cheat sheet</td></tr>
+          <tr><td>Red teaming</td><td>2</td><td>Vendor evaluation criteria; LLM Exploit Generation <span class="pill pill-linked">linked</span></td></tr>
+          <tr><td>Incident response</td><td>1</td><td>GenAI Incident Response Guide <span class="pill pill-linked">linked</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note"><span class="pill pill-current">current</span> = default source · <span class="pill pill-linked">linked</span> = cataloged, not vendored (license unconfirmed) · full manifest: <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor/blob/main/corpus/MANIFEST.yaml"><code>corpus/MANIFEST.yaml</code></a></p>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <h2>Installing the skill</h2>
+    <p class="section-lede"><code>SKILL.md</code> uses the open <a href="https://agentskills.io">Agent Skills</a> format — one canonical file, read natively by 30+ tools. Two ways to use it: work inside a clone of the repo (zero config), or install it into a project you're already working in.</p>
+
+    <div class="local-note">
+      <b>Zero-config path:</b> clone the repo and run any of the tools below from inside it — <code>.claude/</code>, <code>.agents/</code>, <code>.github/</code>, and <code>.gemini/</code> each already contain a <code>skills/genai-security-advisor/SKILL.md</code> symlink back to the canonical root file, so the skill and its <code>corpus/</code> are discovered automatically.
+      <pre style="margin-top:10px">git clone https://github.com/GenAI-Security-Project/GenAI-Security-Advisor.git
+cd GenAI-Security-Advisor</pre>
+    </div>
+
+    <h3 style="margin:34px 0 16px; font-size:15px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.04em; font-weight:700;">Install into another project</h3>
+
+    <div class="platform-card">
+      <h3>Claude Code <span class="tag">marketplace</span></h3>
+      <p>Uses <code>.claude-plugin/marketplace.json</code> at the repo root.</p>
+      <pre>/plugin marketplace add GenAI-Security-Project/GenAI-Security-Advisor
+/plugin install genai-security-advisor</pre>
+      <p style="margin-top:10px">Or copy the skill folder directly into <code>~/.claude/skills/genai-security-advisor/</code> for a personal, cross-project install.</p>
+    </div>
+
+    <div class="platform-card">
+      <h3>OpenAI Codex CLI <span class="tag">npx skills</span></h3>
+      <p>Cross-host installer — can target multiple tools in one command.</p>
+      <pre>npx skills add GenAI-Security-Project/GenAI-Security-Advisor -g
+# or target several hosts at once:
+npx skills add GenAI-Security-Project/GenAI-Security-Advisor \
+  -a codex -a claude-code -a copilot -a gemini-cli</pre>
+    </div>
+
+    <div class="platform-card">
+      <h3>Gemini CLI <span class="tag">extension</span></h3>
+      <p>Uses <code>gemini-extension.json</code> + a top-level <code>skills/genai-security-advisor/SKILL.md</code> at the repo root.</p>
+      <pre>gemini extensions install https://github.com/GenAI-Security-Project/GenAI-Security-Advisor</pre>
+    </div>
+
+    <div class="platform-card">
+      <h3>GitHub Copilot <span class="tag">gh skill</span></h3>
+      <p>Installs to <code>~/.copilot/skills/</code> for use across all your projects.</p>
+      <pre>gh skill install GenAI-Security-Project/GenAI-Security-Advisor</pre>
+    </div>
+
+    <p class="table-note">All of these fetch from GitHub, so they work for anyone with read access to this public repo. Verify exact flags against each tool's current <code>--help</code> — these are fast-moving CLI surfaces. Full details in the <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor#readme">repo README</a>.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>Licensing</h2>
+    <p class="section-lede">Two licenses apply, depending on what you're looking at — check <code>corpus/MANIFEST.yaml</code> for the license of any specific document before redistributing it.</p>
+    <div class="lic-grid">
+      <div class="lic-card">
+        <span class="chip chip-apache">Apache-2.0</span>
+        <p>Covers the skill's own work: <code>SKILL.md</code>, <code>scripts/</code>, workflow and marketplace/extension manifest files, and documentation (this page included).</p>
+        <ul>
+          <li>Free to use, modify, and redistribute</li>
+          <li>See <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor/blob/main/LICENSE">LICENSE</a> in the repo</li>
+        </ul>
+      </div>
+      <div class="lic-card">
+        <span class="chip chip-ccbysa">CC BY-SA 4.0</span>
+        <p>Covers the vendored research under <code>corpus/</code> — third-party content from the OWASP GenAI Security Project's initiative repos, not covered by the Apache-2.0 grant.</p>
+        <ul>
+          <li>Confirmed against each source document's own license statement before vendoring</li>
+          <li>Share and adapt freely, with attribution, share-alike</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lic-note-row">
+      <div class="lic-note"><b>Not everything is vendored.</b> 3 resources are cataloged as <span class="pill pill-linked">linked</span> rather than copied in — the Governance Checklist, the LLM Exploit Generation report, and the GenAI Incident Response Guide — specifically because their license couldn't be confirmed from the source text. The skill links to their <code>genai.owasp.org</code> pages live rather than quoting from an uncleared copy.</div>
+      <div class="lic-note"><b>Independence from upstream.</b> Everything vendored is a frozen, point-in-time copy — never a git submodule or live reference — so an edit to an upstream OWASP repo never silently changes what this skill tells you. Updates are always a deliberate, reviewed act.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="credit">
+        <div><b>Author:</b> Scott Clinton</div>
+        <div><b>Organization:</b> OWASP GenAI Security Project</div>
+      </div>
+      <div class="links">
+        <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor">Repository</a>
+        <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor/blob/main/CHANGELOG.md">Changelog</a>
+        <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor/blob/main/corpus/MANIFEST.yaml">Corpus manifest</a>
+        <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor/releases">Releases</a>
+        <a href="https://genai.owasp.org">genai.owasp.org</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
