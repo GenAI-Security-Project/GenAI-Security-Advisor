@@ -18,10 +18,7 @@
       },
       "license": "Apache-2.0",
       "source": "./",
-      "strict": false,
-      "skills": [
-        "./"
-      ]
+      "strict": false
     }
   ]
 }
