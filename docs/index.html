@@ -138,6 +138,19 @@
   .btn-primary:hover{box-shadow:0 8px 20px rgba(0,0,0,0.25)}
   .btn-ghost{background:transparent; color:#fff; border-color:rgba(255,255,255,0.35)}
 
+  /* ---------- Companion callout ---------- */
+  .companion{
+    margin-top:40px;
+    padding:18px 20px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.22);
+    font-size:14.5px;
+    color:var(--hero-text-dim);
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .companion a{color:#fff; font-weight:700; text-decoration:underline}
+
   /* ---------- Sections ---------- */
   section{padding:64px 0}
   section h2{
@@ -275,6 +288,9 @@
     <div class="cta-row">
       <a class="btn btn-primary" href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor">View on GitHub →</a>
       <a class="btn btn-ghost" href="#install">Install the skill</a>
+    </div>
+    <div class="companion">
+      🔗 Prefer not to check out this repo locally? The companion <a href="https://genai-security-project.github.io/GenAI-Security-Advisor-MCP/">GenAI Security Advisor MCP server</a> exposes this same corpus over HTTP to any MCP-capable agent — no local install.
     </div>
   </div>
 </header>
@@ -434,6 +450,7 @@ npx skills add GenAI-Security-Project/GenAI-Security-Advisor \
         <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor/blob/main/CHANGELOG.md">Changelog</a>
         <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor/blob/main/corpus/MANIFEST.yaml">Corpus manifest</a>
         <a href="https://github.com/GenAI-Security-Project/GenAI-Security-Advisor/releases">Releases</a>
+        <a href="https://genai-security-project.github.io/GenAI-Security-Advisor-MCP/">MCP server</a>
         <a href="https://genai.owasp.org">genai.owasp.org</a>
       </div>
     </div>
