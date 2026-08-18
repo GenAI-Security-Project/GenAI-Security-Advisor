@@ -334,8 +334,6 @@ Use the Advisor as a research and decision-support tool, and validate recommenda
 
 ---
 
----
-
 # Contributing and Asking Questions
 
 The GenAI Security Advisor is an open project and welcomes contributions from the community.
