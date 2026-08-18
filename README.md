@@ -1,6 +1,6 @@
 # GenAI-Security-Advisor
 
-An [Agent Skill](https://agentskills.io) that grounds security guidance in the [OWASP GenAI Security Project](https://genai.owasp.org)'s published research -- the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance -- instead of relying on a model's general (and possibly stale) knowledge of the taxonomy.
+An [Agent Skill](https://agentskills.io) that grounds security guidance in the [OWASP GenAI Security Project](https://genai.owasp.org)'s published research such as the LLM Top 10, the Agentic Top 10, Data Security risk/framework mappings, MCP security, red-teaming, and governance guidance -- instead of relying on a model's general (and possibly stale) knowledge of the projects research and guidance.
 
 - **Author:** Scott Clinton
 - **Organization:** OWASP GenAI Security Project
@@ -35,7 +35,7 @@ All of these fetch from GitHub, so they only work for whoever has read access to
 
 ## Independence from upstream repos
 
-`corpus/` holds **frozen, point-in-time copies** of content from the OWASP GenAI Security Project's various initiative repos -- plain files, copied and committed, never git submodules or any other live reference. If an upstream repo changes, nothing here changes automatically. This is deliberate: the Advisor's answers shouldn't shift underneath users because someone edited a document in an unrelated repo. Pulling in an upstream update is always a manual, reviewed act -- see "Adding or updating a resource" below. Each vendored `MANIFEST.yaml` entry records the exact upstream commit (`vendored_commit`) it was copied from, purely for provenance -- not consulted at query time, not a sync pointer.
+`corpus/` holds **frozen, point-in-time copies** of content from the OWASP GenAI Security Project's various initiative repos plain files, copied and committed, never git submodules or any other live reference. If an upstream repo changes, nothing here changes automatically. This is deliberate: the Advisor's answers shouldn't shift underneath users because someone edited a document in an unrelated repo. Pulling in an upstream update is always a manual, reviewed act. Each vendored `MANIFEST.yaml` entry records the exact upstream commit (`vendored_commit`) it was copied from, purely for provenance not consulted at query time, not a sync pointer.
 
 ## Repository layout
 
