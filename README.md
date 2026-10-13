@@ -1,4 +1,4 @@
-# GenAI Security Advisor
+# GenAI Security Advisor Skills
 
 ## Currently In Preview
 
