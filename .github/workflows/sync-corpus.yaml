@@ -1,0 +1,33 @@
+name: Sync corpus from GenAI-Security-Corpus
+
+on:
+  schedule:
+    - cron: "0 13 * * *" # daily, 13:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Sync corpus content
+        run: scripts/sync_corpus.sh
+
+      - name: Open PR if anything changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "sync: update corpus/ from GenAI-Security-Corpus"
+          title: "Sync corpus/ from GenAI-Security-Corpus"
+          body: |
+            Automated sync from [GenAI-Security-Corpus](https://github.com/GenAI-Security-Project/GenAI-Security-Corpus)'s
+            current `main`. Review the diff before merging -- this does not
+            auto-merge, matching the skill's own update philosophy
+            (updates are reviewed and incorporated deliberately).
+          branch: sync/corpus-update
+          delete-branch: true
