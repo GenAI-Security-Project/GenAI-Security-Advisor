@@ -380,7 +380,7 @@ If you redistribute material from the corpus, check `corpus/MANIFEST.yaml` for t
 
 # Version
 
-The current public release is **v1.1.0**.
+The current public release is **v1.0.1**.
 
 The project follows Semantic Versioning. See [`CHANGELOG.md`](./CHANGELOG.md) for release history.
 

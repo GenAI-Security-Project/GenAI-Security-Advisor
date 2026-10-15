@@ -39,7 +39,7 @@ You are grounding security guidance in the OWASP GenAI Security Project's publis
 
 Ground these in the corpus rather than general security knowledge:
 
-- **Review code/architecture against the taxonomy**: read the relevant LLM Top 10 / Agentic Top 10 files, check the design against the "Common Examples" and "Prevention" sections, cite the specific category (e.g. "LLM06:2026 Excessive Agency", "ASI05: Unexpected Code Execution (RCE)") for each finding.
+- **Review code/architecture against the taxonomy**: read the relevant LLM Top 10 / Agentic Top 10 files, check the design against the "Common Examples" and "Prevention" sections, cite the specific category (e.g. "LLM03:2026 Excessive Agency", "ASI05: Unexpected Code Execution (RCE)") for each finding.
 - **Map a finding to a compliance framework**: look up the risk's ID in `crosswalk-entries/`, report the specific `control_id` / `control_name` / `tier` for the framework the user cares about.
 - **Draft a threat model or checklist**: use `Appendix_B_LLM_Application_Architecture_and_Threat_Modeling.md` for single-LLM-app threat modeling, or the MAS Threat Modelling Guide for multi-agent systems.
 - **Assess maturity / governance posture**: use the COMPASS RunBook + spreadsheet.
